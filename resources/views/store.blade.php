@@ -18,7 +18,7 @@
         <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="price">
             Price
         </label>
-        <input class="w-full p-2 border border-gray-400 rounded" type="text" id="price" name="price"
+        <input class="w-full p-2 border border-gray-400 rounded" type="number" step="0.01" id="price" name="price"
             value="" required>
 
         @error('price')

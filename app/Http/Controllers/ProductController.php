@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         $attr = $request->validate([
             'name' => ['required', 'max:255'],
-            'price' => ['required'],
+            'price' => ['required', 'numeric', 'min:0', 'lt: 1000000' ],
             'description' => ['required'],
         ]);
 
