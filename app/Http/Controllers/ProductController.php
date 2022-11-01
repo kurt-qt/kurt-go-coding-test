@@ -31,13 +31,12 @@ class ProductController extends Controller
     {
         $attr = $request->validate([
             'name' => ['required', 'max:255'],
-            'price' => ['required', 'numeric', 'min:0', 'lt: 1000000' ],
+            'price' => ['required', 'numeric', 'between:0,999999.99'],
             'description' => ['required'],
         ]);
 
-        $product = Product::create($attr);
-        ddd($product);
-        return $request;
+        Product::create($attr);
+        return redirect('/');
     }
 
     /**
