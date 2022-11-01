@@ -11,5 +11,6 @@
             </li>
         @endforeach
     </ul>
+    {{ $products->links() }}
 
 </x-layout>
