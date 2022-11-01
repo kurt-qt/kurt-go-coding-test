@@ -16,6 +16,10 @@ class ProductController extends Controller
     {
         return view('index', ['products' => Product::paginate(50)]);
     }
+    public function create()
+    {
+        return view('store');
+    }
 
     /**
      * Store a newly created resource in storage.

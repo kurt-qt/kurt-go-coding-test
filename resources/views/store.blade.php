@@ -1,3 +1,5 @@
+
+<a href="/">Back to all</a>
 <h1>Create product</h1>
 
 <form method="POST" action="/products">
