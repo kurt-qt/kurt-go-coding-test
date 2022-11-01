@@ -114,4 +114,4 @@ For bonus points, answer the question below by updating this file.
 Q: The management requested a new feature where in the fictional e-commerce app must have a "featured products" section.
 How would you go about implementing this feature in the backend?
 
-A: _Put your answer here_
+A: Store the ids that link to the featured products in a separate table and retrieve the information by joining that table with the products tabel.
