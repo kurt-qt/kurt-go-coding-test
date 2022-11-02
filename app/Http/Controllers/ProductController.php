@@ -16,9 +16,10 @@ class ProductController extends Controller
     {
         return view('index', ['products' => Product::paginate(50)]);
     }
+
     public function create()
     {
-        return view('store');
+        return view('create');
     }
 
     /**
@@ -29,14 +30,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $attr = $request->validate([
-            'name' => ['required', 'max:255'],
-            'price' => ['required', 'numeric', 'between:0,999999.99'],
-            'description' => ['required'],
+            'name' => [
+                'required',
+                'max:255'
+            ],
+            'price' => [
+                'required',
+                'numeric',
+                'regex:/^\d{1,6}(\.\d{1,2})?$/'
+            ],
+            'description' => [
+                'required'
+            ],
         ]);
 
         Product::create($attr);
-        return redirect('/');
+        return redirect('api/products/');
     }
 
     /**
@@ -45,8 +56,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Request $request, $id)
     {
+        $product = Product::find($id)->first();
+
+        // dd($product);
         return view('show', ['product' => $product]);
     }
 }
