@@ -38,7 +38,7 @@ class ProductController extends Controller
             ],
             'price' => [
                 'required',
-                // 'numeric',
+                'numeric',
                 // 'lte:999999.990',
                 // 'gte:0',
                 'regex:/^\d{1,6}(\.\d{1,2})?$/'
