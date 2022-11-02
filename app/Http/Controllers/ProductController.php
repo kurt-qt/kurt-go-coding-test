@@ -38,16 +38,15 @@ class ProductController extends Controller
             ],
             'price' => [
                 'required',
-                'numeric',
-                'lte:9999999.99',
-                'gte:0',
-                'regex:/^\d{1,7}(\.\d{1,2})?$/'
+                // 'numeric',
+                // 'lte:999999.990',
+                // 'gte:0',
+                'regex:/^\d{1,6}(\.\d{1,2})?$/'
             ],
             'description' => [
                 'required'
             ],
         ]);
-
         Product::create($attr);
         return redirect('api/products/');
     }
