@@ -2,7 +2,7 @@
 <a href="/">Back to all</a>
 <h1>Create product</h1>
 
-<form method="POST" action="/products">
+<form method="POST" action="/api/products">
     @csrf <!-- {{ csrf_field() }} -->
     <div class="mb-6">
         <label class="block mb-2 text-xs font-bold text-gray-700 uppercase" for="name">

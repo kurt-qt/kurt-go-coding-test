@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd(request()->all());
         $attr = $request->validate([
             'name' => [
                 'required',
@@ -39,7 +39,9 @@ class ProductController extends Controller
             'price' => [
                 'required',
                 'numeric',
-                'regex:/^\d{1,6}(\.\d{1,2})?$/'
+                'lte:9999999.99',
+                'gte:0',
+                'regex:/^\d{1,7}(\.\d{1,2})?$/'
             ],
             'description' => [
                 'required'
