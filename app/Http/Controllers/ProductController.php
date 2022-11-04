@@ -64,4 +64,35 @@ class ProductController extends Controller
         // dd($product);
         return view('show', ['product' => $product]);
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $product = Product::find($id)->first();
+        $product->delete();
+        return redirect('api/products/');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $product = Product::find($id)->first();
+        $attr = $request->validate([
+            'name' => [
+                'required',
+                'max:255'
+            ],
+            'price' => [
+                'required',
+                'numeric',
+                // 'lte:999999.990',
+                // 'gte:0',
+                'regex:/^\d{1,6}(\.\d{1,2})?$/'
+            ],
+            'description' => [
+                'required'
+            ],
+        ]);
+        $product->update($attr);
+        return redirect('api/products/');
+
+    }
 }
