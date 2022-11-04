@@ -20,4 +20,5 @@ use App\Http\Controllers\ProductController;
 // });
 
 Route::get('products/create', [ProductController::class, 'create']);
+Route::get('products/{product}/edit', [ProductController::class, 'edit']);
 

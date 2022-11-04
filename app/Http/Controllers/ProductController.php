@@ -21,6 +21,12 @@ class ProductController extends Controller
     {
         return view('create');
     }
+    public function edit(Request $request, $id)
+    {
+        $product = Product::find($id)->first();
+
+        return view('edit', ['product'=>$product]);
+    }
 
     /**
      * Store a newly created resource in storage.

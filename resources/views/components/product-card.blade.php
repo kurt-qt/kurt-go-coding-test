@@ -8,5 +8,11 @@
         <p class="text-gray-700 text-base mb-4">
             {{ $product->description }}
         </p>
+        <a href="/products/{{ $product->id }}/edit">Edit</a>
+        <form method="POST" action="/api/products/{{ $product->id }}">
+            @csrf
+            @method('DELETE')
+            <button>Delete</button>
+        </form>
     </div>
 </div>
