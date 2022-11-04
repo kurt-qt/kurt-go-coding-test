@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // public function create()
+    // {
+    //     return view('create');
+    // }
+    // public function edit(Request $request, $id)
+    // {
+    //     $product = Product::find($id)->first();
+    //     return view('edit', ['product'=>$product]);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +24,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('index', ['products' => Product::paginate(50)]);
-    }
-
-    public function create()
-    {
-        return view('create');
-    }
-    public function edit(Request $request, $id)
-    {
-        $product = Product::find($id);
-
-        return view('edit', ['product'=>$product]);
+        return Product::paginate(50);
+        // return view('index', ['products' => Product::paginate(50)]);
     }
 
     /**
@@ -36,7 +36,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(request()->all());
         $attr = $request->validate([
             'name' => [
                 'required',
@@ -53,8 +52,8 @@ class ProductController extends Controller
                 'required'
             ],
         ]);
-        Product::create($attr);
-        return redirect('api/products/');
+
+        return Product::create($attr);
     }
 
     /**
@@ -65,21 +64,23 @@ class ProductController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $product = Product::find($id);
-
-        // dd($product);
-        return view('show', ['product' => $product]);
+        return Product::find($id);
     }
 
     public function destroy(Request $request, $id)
     {
         $product = Product::find($id);
-        return $product->delete();
+
+        if ($product) {
+            return $product->delete();
+        }
+        return;
     }
 
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+
         $attr = $request->validate([
             'name' => [
                 'required',
