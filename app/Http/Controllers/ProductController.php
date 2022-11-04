@@ -23,7 +23,7 @@ class ProductController extends Controller
     }
     public function edit(Request $request, $id)
     {
-        $product = Product::find($id)->first();
+        $product = Product::find($id);
 
         return view('edit', ['product'=>$product]);
     }
@@ -65,7 +65,7 @@ class ProductController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $product = Product::find($id)->first();
+        $product = Product::find($id);
 
         // dd($product);
         return view('show', ['product' => $product]);
@@ -73,14 +73,13 @@ class ProductController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $product = Product::find($id)->first();
-        $product->delete();
-        return redirect('api/products/');
+        $product = Product::find($id);
+        return $product->delete();
     }
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id)->first();
+        $product = Product::find($id);
         $attr = $request->validate([
             'name' => [
                 'required',
@@ -98,7 +97,6 @@ class ProductController extends Controller
             ],
         ]);
         $product->update($attr);
-        return redirect('api/products/');
-
+        return $product;
     }
 }
