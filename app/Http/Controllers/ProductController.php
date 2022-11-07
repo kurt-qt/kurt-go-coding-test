@@ -83,9 +83,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
 
-        $attr = $request->validate([
+        $data = $request->validate([
             'name' => [
                 'required',
                 'max:255'
@@ -101,7 +100,6 @@ class ProductController extends Controller
                 'required'
             ],
         ]);
-        $product->update($attr);
-        return $product;
+        return response($this->productService->update($id, $data));
     }
 }

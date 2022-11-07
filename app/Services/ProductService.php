@@ -13,8 +13,18 @@ class ProductService
         return $this->productRepository->index();
     }
 
-    public function store(array $attr)
+    public function store(array $data)
     {
-        return $this->productRepository->store($attr);
+        return $this->productRepository->store($data);
+    }
+
+    public function destroy(int $id)
+    {
+        return $this->productRepository->destroy($id);
+    }
+
+    public function update(int $id, array $data)
+    {
+        return $this->productRepository->update($id, $data);
     }
 }
