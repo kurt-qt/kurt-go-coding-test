@@ -27,8 +27,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->get('filter');
+        echo $query;
+        return;
+        // var_dump();
+
         $response = [
             "data" => $this->productService->index()
         ];
@@ -74,7 +79,10 @@ class ProductController extends Controller
      */
     public function show(Request $request, $id)
     {
-        return Product::find($id);
+        $response = [
+            "data" => $this->productService->show($id, 'name')
+        ];
+        return response($response);
     }
 
     public function destroy(Request $request, $id)

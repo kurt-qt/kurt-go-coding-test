@@ -24,9 +24,9 @@ abstract class BaseRepository
         return DB::table($this->table)->insert($data);
     }
 
-    public function show(int $id)
+    public function show(mixed $id, ?string $column = null)
     {
-        return DB::table($this->table)->find($id);
+        return DB::table($this->table)->where($column ?: $this->column, $id)->first();
     }
 
     public function destroy(int $id)
@@ -37,6 +37,7 @@ abstract class BaseRepository
     public function update(int $id, array $data)
     {
         try {
+            $data['updated_at'] = Carbon::now()->timestamp;
             return DB::table($this->table)
                 ->where($this->column, $id)
                 ->update($data);

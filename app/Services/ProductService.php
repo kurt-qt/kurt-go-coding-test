@@ -18,6 +18,11 @@ class ProductService
         return $this->productRepository->store($data);
     }
 
+    public function show(mixed $id, ?string $column = null)
+    {
+        return $this->productRepository->show($id, $column);
+    }
+
     public function destroy(int $id)
     {
         return $this->productRepository->destroy($id);
