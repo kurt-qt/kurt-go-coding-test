@@ -29,17 +29,19 @@ abstract class BaseRepository
         return DB::table($this->table)->find($id);
     }
 
-    public function update(int $id, array $data)
-    {
-        return DB::table($this->table)
-            ->find($id)
-            ->update($data);
-    }
-
     public function destroy(int $id)
     {
-        return DB::table($this->table)
-            ->find($id)
-            ->delete();
+        return DB::table($this->table)->delete($id) ?: false;
+    }
+
+    public function update(int $id, array $data)
+    {
+        try {
+            return DB::table($this->table)
+                ->find($id)
+                ->update($data);
+        } catch (\Throwable $e) {
+            return false;
+        }
     }
 }

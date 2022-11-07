@@ -73,12 +73,10 @@ class ProductController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $product = Product::find($id);
-
-        if ($product) {
-            return $product->delete();
-        }
-        return;
+        $response = [
+            "data" => $this->productService->destroy($id)
+        ];
+        return response($response);
     }
 
     public function update(Request $request, $id)
@@ -100,6 +98,10 @@ class ProductController extends Controller
                 'required'
             ],
         ]);
-        return response($this->productService->update($id, $data));
+
+        $response = [
+            "data" => $this->productService->update($id, $data)
+        ];
+        return response($response);
     }
 }
