@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -11,6 +10,7 @@ use Illuminate\Support\Carbon;
 abstract class BaseRepository
 {
     protected $table;
+    protected $column = 'id';
 
     public function index()
     {
@@ -38,7 +38,7 @@ abstract class BaseRepository
     {
         try {
             return DB::table($this->table)
-                ->find($id)
+                ->where($this->column, $id)
                 ->update($data);
         } catch (\Throwable $e) {
             return false;

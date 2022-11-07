@@ -29,7 +29,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response($this->productService->index());
+        $response = [
+            "data" => $this->productService->index()
+        ];
+        return response($response);
     }
 
     /**
@@ -57,7 +60,10 @@ class ProductController extends Controller
             ],
         ]);
 
-        return response($this->productService->store($data));
+        $response = [
+            "data" => $this->productService->store($data)
+        ];
+        return response($response);
     }
 
     /**
