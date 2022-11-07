@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\ProductService;
+
 use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
-    // public function create()
-    // {
-    //     return view('create');
-    // }
-    // public function edit(Request $request, $id)
-    // {
-    //     $product = Product::find($id)->first();
-    //     return view('edit', ['product'=>$product]);
-    // }
+    public function __construct(private ProductService $productService) {}
+
+    public function create()
+    {
+        return view('create');
+    }
+    public function edit(Request $request, $id)
+    {
+        $product = Product::find($id)->first();
+        return view('edit', ['product'=>$product]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -24,8 +29,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::paginate(50);
-        // return view('index', ['products' => Product::paginate(50)]);
+        return response($this->productService->index());
     }
 
     /**
@@ -36,7 +40,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $attr = $request->validate([
+        $data = $request->validate([
             'name' => [
                 'required',
                 'max:255'
@@ -53,7 +57,7 @@ class ProductController extends Controller
             ],
         ]);
 
-        return Product::create($attr);
+        return response($this->productService->store($data));
     }
 
     /**
