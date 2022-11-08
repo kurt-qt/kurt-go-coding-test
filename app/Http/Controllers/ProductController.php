@@ -42,7 +42,6 @@ class ProductController extends Controller
         $response = [
             "data" => $this->productService->index($query)
         ];
-        return;
         return response($response);
     }
 
