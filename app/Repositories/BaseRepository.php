@@ -12,9 +12,18 @@ abstract class BaseRepository
     protected $table;
     protected $column = 'id';
 
-    public function index()
+    public function index(?array $filters = null)
     {
-        return DB::table($this->table)->paginate(50);
+        $query = DB::table($this->table);
+
+        if (!$filters){
+            return $query->paginate(50);
+        }
+
+        foreach ($filters as $filter_key => $filter_value) {
+            $query->where($filter_key, $filter_value);
+        }
+        return $query->paginate(50);
     }
 
     public function store(array $data)

@@ -30,13 +30,19 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = $request->get('filter');
-        echo $query;
-        return;
-        // var_dump();
+
+//        echo $query;
+        $query = json_decode($query, true);
+
+//        echo ($this->productService->index($query));
+//        return;
+
+//        return $query;
 
         $response = [
-            "data" => $this->productService->index()
+            "data" => $this->productService->index($query)
         ];
+        return;
         return response($response);
     }
 

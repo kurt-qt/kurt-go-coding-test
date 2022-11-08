@@ -8,9 +8,9 @@ class ProductService
 {
     public function __construct(private ProductRepository $productRepository) {}
 
-    public function index()
+    public function index(?array $filters)
     {
-        return $this->productRepository->index();
+        return $this->productRepository->index($filters);
     }
 
     public function store(array $data)
