@@ -18,7 +18,7 @@ class ProductService
     public function cheapPrice()
     {
         return $this->productRepository->where(
-            [['price', '>', 10000]]
+            [['price', '<', 10000]]
         );
     }
 
