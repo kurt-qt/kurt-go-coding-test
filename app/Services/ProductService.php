@@ -6,11 +6,20 @@ use App\Repositories\ProductRepository;
 
 class ProductService
 {
-    public function __construct(private ProductRepository $productRepository) {}
+    public function __construct(private ProductRepository $productRepository)
+    {
+    }
 
     public function index(?array $filters)
     {
         return $this->productRepository->index($filters);
+    }
+
+    public function cheapPrice()
+    {
+        return $this->productRepository->where(
+            [['price', '>', 10000]]
+        );
     }
 
     public function store(array $data)

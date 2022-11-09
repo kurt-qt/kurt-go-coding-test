@@ -2,9 +2,8 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 
 abstract class BaseRepository
@@ -12,24 +11,16 @@ abstract class BaseRepository
     protected $table;
     protected $column = 'id';
 
-    public function index(?array $filters = null)
+    public function where(array $filters)
     {
-        $query = DB::table($this->table);
-
-        if (!$filters){
-            return $query->paginate(50);
-        }
-
-        foreach ($filters as $filter_key => $filter_value) {
-            $query->where($filter_key, $filter_value);
-        }
-        return $query->paginate(50);
+        return DB::table($this->table)->where($filters)->get()->toArray();
     }
 
     public function store(array $data)
     {
         $data['created_at'] = Carbon::now()->timestamp;
         $data['updated_at'] = Carbon::now()->timestamp;
+
         return DB::table($this->table)->insert($data);
     }
 
@@ -47,6 +38,7 @@ abstract class BaseRepository
     {
         try {
             $data['updated_at'] = Carbon::now()->timestamp;
+
             return DB::table($this->table)
                 ->where($this->column, $id)
                 ->update($data);
